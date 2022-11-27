@@ -16,6 +16,7 @@ namespace BookStoreApi
                 builder.Configuration.GetSection("BookStoreDatabase")
             );
             builder.Services.AddSingleton<BooksService>();
+            builder.Services.AddSingleton<UsersService>();
             builder.Services.AddControllers();
             builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
