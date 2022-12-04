@@ -2,6 +2,7 @@
 using BookStoreApi.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using BC = BCrypt.Net.BCrypt;
 
 namespace BookStoreApi.Controllers;
 
@@ -26,6 +27,7 @@ public class UsersController : ControllerBase
 
         try
         {
+            newUser.Password = BC.HashPassword(newUser.Password);
             await _usersService.CreateAsync(newUser);
         }
         catch (FormatException) 

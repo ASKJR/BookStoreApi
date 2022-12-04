@@ -6,6 +6,7 @@ using System.IdentityModel.Tokens.Jwt;
 using BookStoreApi.Models;
 using BookStoreApi.Services;
 using Microsoft.AspNetCore.Authorization;
+using BC = BCrypt.Net.BCrypt;
 
 namespace BookStoreApi.Controllers
 {
@@ -35,7 +36,7 @@ namespace BookStoreApi.Controllers
                 return Unauthorized();
             }
 
-            if (user.Password == foundUser.Password)
+            if (BC.Verify(user.Password, foundUser.Password))
             {
                 var secretKey = new SymmetricSecurityKey(
                         Encoding.UTF8.GetBytes("ASKJR-secret-secret-secret")
